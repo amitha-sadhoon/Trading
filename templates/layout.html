@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stock Trading Simulator: {% block title %}{% endblock %}</title>
+
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="S-Treasury Trading Simulator">
+    <meta name="description" content="Trading Simulator in Virtual Environment with Virtual Currency">
+
+
+
+    <!--====== Favicon Icon ======-->
+    <link rel="shortcut icon" href="/static/theme/images/favicon.ico" type="image/ico" />
+
+    <!-- ===== All CSS files ===== -->
+    <link rel="stylesheet" href="/static/theme/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/static/theme/css/animate.css" />
+    <link rel="stylesheet" href="/static/theme/css/lineicons.css" />
+    <link rel="stylesheet" href="/static/theme/css/ud-styles.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <script src="/static/charting_library/charting_library.standalone.js"></script>
+    <script src="/static/datafeeds/udf/dist/bundle.js"></script>
+
+    <style>
+        .sticky {
+            background-color: rgb(0 0 0);
+        }
+
+        .sticky .navbar-btn .ud-main-btn.ud-login-btn {
+            color: #ffffff;
+        }
+
+        .sticky .navbar-nav .nav-item a {
+            color: #ffffff;
+        }
+
+        .sticky .navbar-btn .ud-white-btn {
+            background: #efd465;
+            color: #000000;
+        }
+
+        .ud-single-feature .ud-feature-icon {
+            background: #4c100f
+        }
+
+        .ud-widget .ud-widget-links a:hover {
+            color: #efd465;
+            padding-left: 10px;
+        }
+        
+  .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .video-container video {
+      width: 100%;
+      height: auto;
+    }
+        
+    </style>
+</head>
+
+
+<body>
+    <!-- ====== Header Start ====== -->
+    <header class="ud-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <nav class="navbar navbar-expand-lg">
+                        <a href="/">
+                            <img src="/static/theme/images/logo/s-treasury.png" style="max-width:200px" alt="Logo" />
+                        </a>
+                        <button class="navbar-toggler">
+                            <span class="toggler-icon"> </span>
+                            <span class="toggler-icon"> </span>
+                            <span class="toggler-icon"> </span>
+                        </button>
+
+                        <div class="navbar-collapse">
+                            <ul id="nav" class="navbar-nav mx-auto">
+                                <li class="nav-item">
+                                    <a href="/">Home</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="ud-menu-scroll" href="#about">About</a>
+                                </li>
+
+
+
+                                <!-- <li class="nav-item">
+                                    <a href="/innovative_solution">Innovative Solution</a>
+                                </li> -->
+
+
+                                <li class="nav-item">
+                                    <a class="ud-menu-scroll" href="#contact">Brokerage API</a>
+                                </li>
+                                <li class="nav-item nav-item-has-children">
+                                    <a href="javascript:void(0)"> Education </a>
+                                    <ul class="ud-submenu">
+                                        <li class="ud-submenu-item">
+                                            <a href="about.html" class="ud-submenu-link">
+                                                Technical Analysis
+                                            </a>
+                                        </li>
+                                        <li class="ud-submenu-item">
+                                            <a href="pricing.html" class="ud-submenu-link">
+                                                Graphical Analysis
+                                            </a>
+                                        </li>
+                                        <li class="ud-submenu-item">
+                                            <a href="contact.html" class="ud-submenu-link">
+                                                Trading Strategies
+                                            </a>
+                                        </li>
+                                        <li class="ud-submenu-item">
+                                            <a href="blog.html" class="ud-submenu-link">
+                                                Psychology of Trading
+                                            </a>
+                                        </li>
+                                        <li class="ud-submenu-item">
+                                            <a href="blog-details.html" class="ud-submenu-link">
+                                                Tutorials
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                {% if session.user_id %}
+                                <li class="nav-item">
+                                    <a href="/market">Market</a>
+                                </li>
+                                {% endif %}
+
+
+                            </ul>
+                        </div>
+
+
+
+                        {% if session.user_id %}
+                        <div class="navbar-btn d-none d-sm-inline-block">
+                            <a href="/logout" class="ud-main-btn ud-login-btn">
+                                Logout
+                            </a>
+                        </div>
+                        {% else %}
+                        <div class="navbar-btn d-none d-sm-inline-block">
+                            <a href="#" class="ud-main-btn ud-login-btn" data-toggle="modal" data-target="#signinModal">
+                                Sign In
+                            </a>
+
+                            <a href="#" class="ud-main-btn ud-white-btn" data-toggle="modal" data-target="#signupModal">
+                                Sign Up
+                            </a>
+
+
+                        </div>
+                        {% endif %}
+
+
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ====== Header End ====== -->
+
+    <!-- ====== Main Start ====== -->
+
+    {% block main %}{% endblock %}
+    <!-- ====== Main End ====== -->
+
+    <!-- Sign in Modal -->
+    <div class="modal fade" id="signinModal" tabindex="-1" role="dialog" aria-labelledby="signinModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="signinModalLabel">Sign In</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <section class="ftco-section">
+                        <div class="container">
+
+                            <div class="row justify-content-center"
+                                style="margin-bottom: -16px;margin-left: -31px;margin-top: -16px;">
+
+
+                                <div class="col-6"
+                                    style="background-size: cover;background-image: url(/static/theme/images/successful-cfd-trader.jpeg);background-position: center center;">
+
+                                </div>
+                                <div class="col-6" style="padding:2rem;">
+                                    <div id="error-message" style="color: red;"></div>
+
+                                    <form id="signin-form" method="POST">
+                                        <div class="form-group mb-3">
+                                            <label class="label" for="username">Username or Email</label>
+                                            <input type="text" class="form-control" id="username" name="username"
+                                                placeholder="Username or Email">
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label class="label" for="password">Password</label>
+                                            <input type="password" class="form-control" id="password" name="password"
+                                                placeholder="Password">
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit"
+                                                class="form-control btn btn-primary rounded submit px-3"
+                                                style="background: #e3b04b !important; border: #e3b04b !important">Sign
+                                                In</button>
+
+                                        </div>
+                                        <div class="form-group d-md-flex">
+                                            <div class="w-50 text-left">
+                                                <label class="checkbox-wrap checkbox-primary mb-0"
+                                                    style="color:#e3b04b">Remember Me
+                                                    <input type="checkbox" style="color:#e3b04b" checked>
+                                                    <span class="checkmark" style="vackground-color:#e3b04b"></span>
+                                                </label>
+                                            </div>
+                                            <div class="w-50 text-md-right">
+                                                <a href="#" style="color:#e3b04b">Forgot Password</a>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                    <p class="text-center">Not a member? <a href="#" id="openSignup"
+                                            style="color:#e3b04b">Sign Up</a></p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="signupModalLabel">Sign Up</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <section class="ftco-section">
+                        <div class="container">
+
+                            <div class="row justify-content-center"
+                                style="margin-bottom: -16px;margin-left: -31px;margin-top: -16px;">
+
+                                <div class="col-6"
+                                    style="background-size: cover;background-image: url(/static/theme/images/s-treasury-signup-image.jpeg);background-position: center center;">
+
+                                </div>
+                                <div class="col-6" style="padding:2rem;">
+
+                                <form class="signup-form" id="registration-form">
+                                        <div class="form-group mb-3">
+                                            <label class="label" for="email">Email</label>
+                                            <input type="text" class="form-control" id="signup-email" name="email"
+                                                placeholder="Email" required>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label class="label" for="username">Username</label>
+                                            <input type="text" class="form-control" id="signup-username" name="username"
+                                                placeholder="Username" required>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label class="label" for="password">Password</label>
+                                            <input type="password" class="form-control" id="signup-password" name="password"
+                                                placeholder="Password" required>
+                                        </div>
+                                        <button type="submit" class="form-control btn btn-primary rounded submit px-3"
+                                            style="background: #e3b04b !important; border: #e3b04b !important">Sign
+                                            In</button>
+                                    </form>
+
+                                    <p class="text-center">Already have an account? <a href="#" id="openSignin"
+                                            style="color:#e3b04b">Sign In</a></p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====== Footer Start ====== -->
+    <footer class="ud-footer wow fadeInUp" data-wow-delay=".15s" style="background:#4c100f">
+        <div class="shape shape-1">
+            <img src="/static/theme/images/footer/shape-1.svg" alt="shape" />
+        </div>
+        <div class="shape shape-2">
+            <img src="/static/theme/images/footer/shape-2.svg" alt="shape" />
+        </div>
+        <div class="shape shape-3">
+            <img src="/static/theme/images/footer/shape-3.svg" alt="shape" />
+        </div>
+        <div class="ud-footer-widgets">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-3 col-lg-4 col-md-6">
+                        <div class="ud-widget">
+                            <a href="/" class="ud-footer-logo">
+                                <!--<img src="/static/theme/images/logo/logo.svg" alt="logo" />-->
+                            </a>
+                            <p class="ud-widget-desc">
+                                We create virtual environment for traders with virtual currency
+                            </p>
+                            <ul class="ud-widget-socials">
+                                <li>
+                                    <a href="https://www.facebook.com/streasury/">
+                                        <i class="lni lni-facebook-filled"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.instagram.com/s.treasury.company/">
+                                        <i class="lni lni-instagram-filled"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://qa.linkedin.com/company/s-treasuryy">
+                                        <i class="lni lni-linkedin-original"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6">
+                        <div class="ud-widget">
+                            <h5 class="ud-widget-title">About Us</h5>
+                            <ul class="ud-widget-links">
+                                <li>
+                                    <a href="javascript:void(0)">Home</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">Features</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">About</a>
+                                </li>
+                                <li>
+                                    <!--<a href="javascript:void(0)">Testimonial</a>-->
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6">
+                        <div class="ud-widget">
+                            <h5 class="ud-widget-title">Features</h5>
+                            <ul class="ud-widget-links">
+                                <li>
+                                    <a href="javascript:void(0)">How it works</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">Privacy policy</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">Terms of service</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">Brokerage API</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6">
+                        <div class="ud-widget">
+                            <h5 class="ud-widget-title">Education</h5>
+                            <ul class="ud-widget-links">
+                                <li>
+                                    <a href="https://lineicons.com/" rel="nofollow noopner" target="_blank">Technical
+                                        Analysis
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://ecommercehtml.com/" rel="nofollow noopner"
+                                        target="_blank">Graphical Analysis</a>
+                                </li>
+                                <li>
+                                    <a href="https://ayroui.com/" rel="nofollow noopner" target="_blank">Psychology of
+                                        Trading</a>
+                                </li>
+                                <li>
+                                    <a href="https://graygrids.com/" rel="nofollow noopner"
+                                        target="_blank">Tutorials</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="ud-footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <ul class="ud-footer-bottom-left">
+                            <li>
+                                <a href="javascript:void(0)">Privacy policy</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)">Support policy</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)">Terms of service</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="ud-footer-bottom-right">
+                            Data generated by <a style="color:aliceblue" href="https://s-treasuryqa.com">S-Treasury</a>
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ====== Footer End ====== -->
+
+    <!-- ====== Back To Top Start ====== -->
+    <a href="javascript:void(0)" class="back-to-top">
+        <i class="lni lni-chevron-up"> </i>
+    </a>
+    <!-- ====== Back To Top End ====== -->
+
+    <!-- ====== All Javascript Files ====== -->
+    <script src="/static/theme/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/theme/js/wow.min.js"></script>
+    <script src="/static/theme/js/main.js"></script>
+    <!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>-->
+        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>-->
+
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.20.0/dist/jquery.validate.min.js"></script>
+    <script>
+        // ==== for menu scroll
+        const pageLink = document.querySelectorAll(".ud-menu-scroll");
+
+        pageLink.forEach((elem) => {
+            elem.addEventListener("click", (e) => {
+                e.preventDefault();
+                document.querySelector(elem.getAttribute("href")).scrollIntoView({
+                    behavior: "smooth",
+                    offsetTop: 1 - 60,
+                });
+            });
+        });
+
+        // section menu active
+        function onScroll(event) {
+            const sections = document.querySelectorAll(".ud-menu-scroll");
+            const scrollPos =
+                window.pageYOffset ||
+                document.documentElement.scrollTop ||
+                document.body.scrollTop;
+
+            for (let i = 0; i < sections.length; i++) {
+                const currLink = sections[i];
+                const val = currLink.getAttribute("href");
+                const refElement = document.querySelector(val);
+                const scrollTopMinus = scrollPos + 73;
+                if (
+                    refElement.offsetTop <= scrollTopMinus &&
+                    refElement.offsetTop + refElement.offsetHeight > scrollTopMinus
+                ) {
+                    document
+                        .querySelector(".ud-menu-scroll")
+                        .classList.remove("active");
+                    currLink.classList.add("active");
+                } else {
+                    currLink.classList.remove("active");
+                }
+            }
+        }
+
+        window.document.addEventListener("scroll", onScroll);
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            // Handle click event to open the Sign Up modal from the Sign In modal
+             $("#openSignup").click(function () {
+        document.getElementById('signinModal').style.display = 'none';
+ // Close the Sign In modal
+        $("#signupModal").modal("show"); // Open the Sign Up modal
+    });
+
+    // Handle click event to open the Sign In modal from the Sign Up modal
+    $("#openSignin").click(function () {
+    document.getElementById('signupModal').style.display = 'none'; // Close the Sign Up modal
+
+        $("#signinModal").modal("show"); // Open the Sign In modal
+    });
+
+            $("#signin-form").validate({
+                rules: {
+                    username: {
+                        required: true,
+                        email: true,
+                    },
+                    password: "required"
+                },
+                messages: {
+                    username: {
+                        required: "Username or email is required",
+                        email: "Invalid email format",
+                        remote: "Invalid credentials" // Custom message for remote validation
+                    },
+                    password: "Password is required"
+                },
+           
+                   errorPlacement: function (error, element) {
+                    if (element.attr("name") === "username") {
+        error.insertAfter(element); 
+                    } else if (element.attr("name") === "password") {
+        error.insertAfter(element); 
+                     }
+                 },
+                // Handle the form submission after successful validation
+                submitHandler: function (form) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/check_credentials",
+                        data: $(form).serialize(),
+                        success: function (response) {
+                            console.log(response);
+                            if (response.success) {
+                                // Credentials are valid, redirect to /market
+                                window.location.href = response.redirect_url;
+                            } else {
+                                // Credentials are invalid, handle the error message
+                                $("#error-message").text("Invalid credentials");
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            // Handle any AJAX errors more gracefully
+                            // You can display a general error message to the user
+                            $("#error-message").text("An error occurred while processing your request.");
+                            console.log("XHR: ", xhr.responseText);
+                            console.log("Status: ", status);
+                            console.log("Error: ", error);
+                        }
+                    });
+                }
+            });
+
+        $("#registration-form").validate({
+    rules: {
+        email: {
+            required: true,
+            email: true,
+            remote: {
+                url: "/check_email",
+                type: "post",
+                data: {
+                    
+                    email: function () {
+                        return $("#signup-email").val();
+                    }
+                },
+                dataFilter: function (data) {
+                    var response = $.parseJSON(data);
+                    return response.valid;
+                   
+                }
+            }
+        },
+        username: {
+            required: true,
+            remote: {
+                url: "/check_username",
+                type: "post",
+                data: {
+                    username: function () {
+                        return $("#signup-username").val();
+                    },
+                },
+                dataFilter: function (data) {
+                   var response = $.parseJSON(data);
+                    return response.valid;
+                   
+                }
+            }
+        },
+        password: "required"
+    },
+    messages: {
+        email: {
+            required: "Email is required",
+            email: "Invalid email format",
+            remote: "Email is already in use"
+        },
+        username: {
+            required: "Username is required",
+            remote: "Username is already in use"
+        },
+        password: "Password is required"
+    },
+    errorPlacement: function (error, element) {
+        console.log(error);
+        if (element.attr("name") === "email" || element.attr("name") === "username") {
+            error.insertAfter(element);
+        } else if (element.attr("name") === "password") {
+            error.insertAfter(element);
+        }
+    },
+    onfocusout: function (element) {
+        this.element(element);
+    },
+    onkeyup: function (element, event) {
+        if (event.which === 9 && this.elementValue(element)) {
+            this.element(element);
+        }
+    },
+    highlight: function (element) {
+        $(element).addClass("error");
+        $("form").find(":input[type='submit']").prop("disabled", true);
+    },
+    unhighlight: function (element) {
+        $(element).removeClass("error");
+        if (this.numberOfInvalids() === 0) {
+            $("form").find(":input[type='submit']").prop("disabled", false);
+        }
+    },
+    submitHandler: function (form) {
+        $(form).find(":input[type='submit']").prop("disabled", true);
+
+        $.ajax({
+            type: "POST",
+            url: "/register",
+            data: $(form).serialize(),
+            success: function (response) {
+                $(form).find(":input[type='submit']").prop("disabled", false);
+
+                if (response.status === true) {
+                    window.location.href = "/market";
+                } else {
+                    alert(response.status);
+                }
+            },
+            error: function (xhr, status, error) {
+                $(form).find(":input[type='submit']").prop("disabled", false);
+
+                alert("An error occurred while processing your request.");
+                console.log("XHR: ", xhr.responseText);
+                console.log("Status: ", status);
+                console.log("Error: ", error);
+            }
+        });
+    }
+});
+
+
+        });
+    </script>
+
+
+</body>
+
+</html>

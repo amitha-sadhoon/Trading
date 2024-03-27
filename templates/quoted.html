@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quote
+{% endblock %}
+
+{% block main %}
+    <div id="stock-symbol">{{ stock["symbol"] }}</div>
+
+    
+    <div id="graph-container" class="row">
+        <div class="col-md-3">
+            <img src="{{ stock['logo'] }}" alt="{{ stock['companyName'] }}" width="30%">
+    
+            <p>
+               ({{ stock["symbol"] }}) {{ price }}.
+            </p>
+        
+        </div>
+        <div class="btn-group btn-graph col-md-8">
+            <button id="1m" class="btn btn-default">1 Month</button>
+            <button id="3m" class="btn btn-default">3 Months</button>
+            <button id="6m" class="btn btn-default">6 Months</button>
+            <button id="1y" class="btn btn-default">1 Year</button>
+            <button id="2y" class="btn btn-default">2 Years</button>
+            <button id="5y" class="btn btn-default">5 Years</button>
+        </div>
+        <div id="stock-graph" class="graph"></div>
+    </div>
+
+    <script src="static/js/quoted.js"></script>
+
+{% endblock %}

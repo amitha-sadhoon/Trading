@@ -1,0 +1,4 @@
+flask
+requests
+Flask-RESTful
+Flask-Mail

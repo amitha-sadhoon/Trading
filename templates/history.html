@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+    <table class="table table-striped">
+        <thead align="left">
+            <tr>
+                <th>Ticker</th>
+                <th>Shares</th>
+                <th>Price Per Share</th>
+                <th>Market Value</th>
+                <th>Transacted</th>
+            </tr>
+        </thead>
+        <tbody align="left">
+            {% for history in histories %}
+                <tr>
+                    <td>{{ history["symbol"] }}</td>
+                    <td>{{ history["transactions"] }}</td>
+                    <td>{{ history["price"] }}</td>
+                    {% if history["price"] * history["transactions"] < 0 %}
+                        <td>{{ -history["transactions"] * history["price"] }}</td>
+                    {% else %}
+                        <td>{{ history["transactions"] * history["price"] }}</td>
+                    {% endif %}
+                    <td>{{ history["time_"] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

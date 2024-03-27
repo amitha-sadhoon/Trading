@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stock Trading Simulator: {% block title %}{% endblock %}</title>
+
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="Play - Free Open Source HTML Bootstrap Template by UIdeck">
+  <meta name="description" content="Play - Free Open Source HTML Bootstrap Template by UIdeck Team">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://uideck.com/play/">
+  <meta property="og:title" content="Play - Free Open Source HTML Bootstrap Template by UIdeck">
+  <meta property="og:description" content="Play - Free Open Source HTML Bootstrap Template by UIdeck Team">
+  <meta property="og:image" content="https://uideck.com/wp-content/uploads/2021/09/play-meta-bs.jpg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://uideck.com/play/">
+  <meta property="twitter:title" content="Play - Free Open Source HTML Bootstrap Template by UIdeck">
+  <meta property="twitter:description" content="Play - Free Open Source HTML Bootstrap Template by UIdeck Team">
+  <meta property="twitter:image" content="https://uideck.com/wp-content/uploads/2021/09/play-meta-bs.jpg">
+
+  <!--====== Favicon Icon ======-->
+  <link rel="shortcut icon" href="/static/theme/images/favicon.ico" type="image/ico" />
+
+  <!-- ===== All CSS files ===== -->
+  <!--<link rel="stylesheet" href="/static/theme/css/bootstrap.min.css" />-->
+  <link rel="stylesheet" href="/static/theme/css/animate.css" />
+  <link rel="stylesheet" href="/static/theme/css/lineicons.css" />
+  <link rel="stylesheet" href="/static/theme/css/ud-styles.css" />
+
+  <script src="/static/charting_library/charting_library.standalone.js"></script>
+  <script src="/static/datafeeds/udf/dist/bundle.js"></script>
+  
+  
+      <!-- Add Bootstrap CSS and JavaScript links here -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+
+    
+<body>
+    <!-- ====== Header Start ====== -->
+    <!-- <header class="ud-header">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <nav class="navbar navbar-expand-lg">
+         
+              <button class="navbar-toggler">
+                <span class="toggler-icon"> </span>
+                <span class="toggler-icon"> </span>
+                <span class="toggler-icon"> </span>
+              </button>
+  
+              <div class="navbar-collapse">
+                <ul id="nav" class="navbar-nav mx-auto">
+                  <li class="nav-item">
+                    <a href="/">Home</a>
+                  </li>
+  
+                  <li class="nav-item">
+                    <a class="ud-menu-scroll" href="#about">About</a>
+                  </li>
+                 
+                
+                  <li class="nav-item">
+                    <a class="ud-menu-scroll" href="#contact">Brokerage API</a>
+                  </li>
+                  <li class="nav-item nav-item-has-children">
+                    <a href="javascript:void(0)"> Education </a>
+                    <ul class="ud-submenu">
+                      <li class="ud-submenu-item">
+                        <a href="about.html" class="ud-submenu-link">
+                          Technical Analysis
+                        </a>
+                      </li>
+                      <li class="ud-submenu-item">
+                        <a href="pricing.html" class="ud-submenu-link">
+                          Graphical Analysis
+                        </a>
+                      </li>
+                      <li class="ud-submenu-item">
+                        <a href="contact.html" class="ud-submenu-link">
+                          Trading Strategies
+                        </a>
+                      </li>
+                      <li class="ud-submenu-item">
+                        <a href="blog.html" class="ud-submenu-link">
+                         Psychology of Trading
+                        </a>
+                      </li>
+                      <li class="ud-submenu-item">
+                        <a href="blog-details.html" class="ud-submenu-link">
+                          Tutorials
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+
+                  {% if session.user_id %}
+                  <li class="nav-item">
+                    <a href="/market">Market</a>
+                  </li>
+                  {% endif %}
+
+                  {% if session.user_id %}
+                  <li class="nav-item">
+                    <a href="/portfolio">Portfolio</a>
+                  </li>
+                  {% endif %}
+                </ul>
+              </div>
+  
+              
+
+              {% if session.user_id %}
+              <div class="navbar-btn d-none d-sm-inline-block">
+                <a href="/logout" class="ud-main-btn ud-login-btn">
+                  Logout
+                </a>
+              </div>
+          {% else %}
+          <div class="navbar-btn d-none d-sm-inline-block">
+            <a href="/login" class="ud-main-btn ud-login-btn">
+              Sign In
+            </a>
+            <a class="ud-main-btn ud-white-btn" href="javascript:void(0)">
+              Sign Up
+            </a>
+          </div>
+          {% endif %}
+
+
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header> -->
+    <!-- ====== Header End ====== -->
+  
+    <!-- ====== Main Start ====== -->
+  
+    {% block main %}{% endblock %}
+    <!-- ====== Main End ====== -->
+
+  
+  
+    <!-- ====== All Javascript Files ====== -->
+    <!--<script src="/static/theme/js/bootstrap.bundle.min.js"></script>-->
+    <script src="/static/theme/js/wow.min.js"></script>
+    <script src="/static/theme/js/main.js"></script>
+    <script>
+      // ==== for menu scroll
+      const pageLink = document.querySelectorAll(".ud-menu-scroll");
+  
+      pageLink.forEach((elem) => {
+        elem.addEventListener("click", (e) => {
+          e.preventDefault();
+          document.querySelector(elem.getAttribute("href")).scrollIntoView({
+            behavior: "smooth",
+            offsetTop: 1 - 60,
+          });
+        });
+      });
+  
+      // section menu active
+      function onScroll(event) {
+        const sections = document.querySelectorAll(".ud-menu-scroll");
+        const scrollPos =
+          window.pageYOffset ||
+          document.documentElement.scrollTop ||
+          document.body.scrollTop;
+  
+        for (let i = 0; i < sections.length; i++) {
+          const currLink = sections[i];
+          const val = currLink.getAttribute("href");
+          const refElement = document.querySelector(val);
+          const scrollTopMinus = scrollPos + 73;
+          if (
+            refElement.offsetTop <= scrollTopMinus &&
+            refElement.offsetTop + refElement.offsetHeight > scrollTopMinus
+          ) {
+            document
+              .querySelector(".ud-menu-scroll")
+              .classList.remove("active");
+            currLink.classList.add("active");
+          } else {
+            currLink.classList.remove("active");
+          }
+        }
+      }
+  
+      window.document.addEventListener("scroll", onScroll);
+    </script>
+  </body>
+  
+  </html>

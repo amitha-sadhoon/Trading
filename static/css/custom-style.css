@@ -1,0 +1,214 @@
+    /* Remove margin and padding from all columns and rows */
+    .container,
+    .row,
+    [class^="col-"] {
+        margin: 0;
+        padding: 0;
+    }
+
+
+    /* Custom class to remove left margin */
+    .no-left-margin {
+        margin-left: 0;
+    }
+
+    /* Custom class to remove right margin */
+    .no-right-margin {
+        margin-right: 0;
+    }
+
+    /* Remove padding from .container-fluid */
+    .container-fluid {
+        padding: 0;
+    }
+
+    /* Sidebar styling */
+    .sidebar {
+        background-color: #343a40;
+        color: #fff;
+        height: 100vh;
+        width: 260px;
+        /* Adjusted width for the sidebar */
+        padding-right: 0;
+    }
+
+    .sidebar .nav-item {
+        padding: 1rem 2rem;
+        border-bottom: 1px solid #454d53;
+        display: flex;
+        align-items: center;
+    }
+
+    .nav-item i {
+        margin-right: 1rem;
+    }
+
+    /* Main content styling */
+    .main-content {
+        background-color: #f8f9fa;
+        height: 100vh;
+    }
+
+    .watchlist {
+        padding: 1rem;
+        max-height: 40vh;
+        /* Set a maximum height for the news section */
+        overflow-y: auto;
+
+    }
+
+    .buy-sell-options {
+        padding: 2rem;
+    }
+
+    /* Watchlist table styling */
+    .watchlist-table {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .watchlist-table th,
+    .watchlist-table td {
+        text-align: center;
+    }
+
+    /* Watchlist item styling */
+    .watchlist-logo {
+        width: 30px;
+        height: 30px;
+        background-color: #ccc;
+        /* Placeholder for logo background */
+        margin-right: 1rem;
+    }
+
+    /* News Section styling */
+    .news-section {
+        max-height: 40vh;
+        /* Set a maximum height for the news section */
+        overflow-y: auto;
+        /* Add vertical scroll if content overflows */
+        padding: 0 15px;
+        /* Add padding for better appearance */
+    }
+
+    html {
+        font-size: 14px;
+    }
+
+
+    /* Tabs Styling */
+    .tab-pane {
+        padding: 1rem;
+    }
+
+    .tabbable-line>.nav-tabs {
+        border: none;
+        margin: 0px;
+    }
+
+    .tabbable-line>.nav-tabs>li {
+        margin-right: 2px;
+    }
+
+    .tabbable-line>.nav-tabs>li>a {
+        border: 0;
+        margin-right: 0;
+        color: #737373;
+    }
+
+    /* .tabbable-line>.nav-tabs>li>a>i {
+            color: #000000;
+        } */
+
+    .tabbable-line>.nav-tabs>li.open,
+    .tabbable-line>.nav-tabs>li:hover {
+        border-bottom: 4px solid rgb(0, 0, 0);
+    }
+
+    /* .tabbable-line>.nav-tabs>li {
+            border-bottom: 4px solid rgb(180, 180, 180);
+        } */
+
+    .tabbable-line>.nav-tabs>li.open>a,
+    .tabbable-line>.nav-tabs>li:hover>a {
+        border: 0;
+        background: none !important;
+        color: #333333;
+    }
+
+    .tabbable-line>.nav-tabs>li.open>a>i,
+    .tabbable-line>.nav-tabs>li:hover>a>i {
+        color: #a6a6a6;
+    }
+
+    .tabbable-line>.nav-tabs>li.open .dropdown-menu,
+    .tabbable-line>.nav-tabs>li:hover .dropdown-menu {
+        margin-top: 0px;
+    }
+
+
+
+    .nav-tabs .nav-link.active {
+        border-bottom: 4px solid #32465B;
+    }
+
+    .tabbable-line>.nav-tabs>li.active>a {
+        border: 0;
+        color: #333333;
+    }
+
+    .tabbable-line>.nav-tabs>li.active>a>i {
+        color: #404040;
+    }
+
+    .tabbable-line>.nav-tabs>li.active {
+        border-bottom: 4px solid rgb(0, 0, 0);
+    }
+
+    .tabbable-line>.tab-content {
+        margin-top: -3px;
+        background-color: #fff;
+        border: 0;
+        /* border-top: 1px solid #eee; */
+        padding: 15px 0;
+    }
+
+    .portlet .tabbable-line>.tab-content {
+        padding-bottom: 0;
+    }
+
+    .card-header {
+        padding: 0;
+    }
+
+    /* Custom CSS to make the table header fixed */
+    .table-fixed {
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    .table-fixed thead {
+        position: sticky;
+        top: 0;
+        background-color: #fff;
+    }
+
+    /* Custom CSS for the close button */
+    .close-button {
+        display: none;
+    }
+
+    /* Show the close button tooltip on row hover */
+    tr:hover .close-button {
+        display: inline;
+    }
+
+    .watchlist-custom-row {
+        height: 20px;
+        /* Adjust the height as needed */
+    }
+    
+    body {
+            font-family: 'Trebuchet MS', 'Roboto', 'Ubuntu', sans-serif;
+        }
+        

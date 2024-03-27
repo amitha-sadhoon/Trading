@@ -1,0 +1,53 @@
+[2023-10-27 10:36:21,870] ERROR in app: Exception on /history [GET]
+Traceback (most recent call last):
+  File "/home/lpeclk/virtualenv/streasury.informake.com/3.11/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lpeclk/virtualenv/streasury.informake.com/3.11/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lpeclk/virtualenv/streasury.informake.com/3.11/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lpeclk/virtualenv/streasury.informake.com/3.11/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "app.py", line 417, in history
+    db, cursor = open_database()
+                 ^^^^^^^^^^^^^^^
+  File "app.py", line 70, in open_database
+    g.db = mysql.connector.connect(**params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lpeclk/virtualenv/streasury.informake.com/3.11/lib/python3.11/site-packages/mysql/connector/__init__.py", line 273, in connect
+    return MySQLConnection(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lpeclk/virtualenv/streasury.informake.com/3.11/lib/python3.11/site-packages/mysql/connector/connection.py", line 114, in __init__
+    self.connect(**kwargs)
+  File "/home/lpeclk/virtualenv/streasury.informake.com/3.11/lib/python3.11/site-packages/mysql/connector/abstracts.py", line 1014, in connect
+    self._open_connection()
+  File "/home/lpeclk/virtualenv/streasury.informake.com/3.11/lib/python3.11/site-packages/mysql/connector/connection.py", line 427, in _open_connection
+    self._do_handshake()
+  File "/home/lpeclk/virtualenv/streasury.informake.com/3.11/lib/python3.11/site-packages/mysql/connector/connection.py", line 147, in _do_handshake
+    raise errors.get_exception(packet)
+mysql.connector.errors.DatabaseError: 1130: Host 'webhosting3005.is.cc' is not allowed to connect to this MariaDB server
+[2023-11-03 00:41:27,602] ERROR in app: Exception on /symbols [GET]
+Traceback (most recent call last):
+  File "/home/lpeclk/virtualenv/streasury.informake.com/3.11/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lpeclk/virtualenv/streasury.informake.com/3.11/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lpeclk/virtualenv/streasury.informake.com/3.11/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/lpeclk/virtualenv/streasury.informake.com/3.11/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "app.py", line 595, in get_symbols
+    company['symbol']: {
+    ~~~~~~~^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+[UID:1010][1026133] Child process with pid: 1051171 was killed by signal: 15, core dumped: no
+[UID:1010][1026133] Child process with pid: 1053355 was killed by signal: 15, core dumped: no
+[UID:1010][1026133] Child process with pid: 1053354 was killed by signal: 15, core dumped: no

@@ -1,0 +1,103 @@
+{% extends "market_layout.html" %}
+
+{% block title %}
+Market
+{% endblock %}
+
+{% block main %}
+
+<div class="contain">
+
+  <div class="main-content">
+    <div id="chartContainer"></div>
+  </div>
+  
+</div>
+
+
+<style>
+  .contain {
+    display: flex;
+
+  }
+
+  .main-content {
+    flex: 9;
+
+  }
+
+  .sidebar {
+    flex: 3;
+    background-color: #131722;
+    margin-right: 0;
+
+
+  }
+
+  .dark {
+    background-color: #131722;
+    border-color:#3f3f3f
+
+
+    
+  }
+.list-group-item{
+  background-color: #131722;
+  color: rgb(229, 230, 231);
+}
+
+.list-group-item.active {
+  z-index: 2;
+  color: #000000;
+  background-color: #ffffff;
+  border-color: #ffffff;
+}
+
+a {
+  color: #e4e5e6;
+}
+
+  
+  
+</style>
+<script>
+  const symbol = '{{ symbol }}'; 
+  const widget = new TradingView.widget({
+    container_id: 'chartContainer',
+    datafeed: new Datafeeds.UDFCompatibleDatafeed('https://tradingsimulator.alkunsolutions.com', 'live'),
+    symbol: symbol,
+    interval: '1D',
+    fullscreen: true,
+    debug: true,
+    theme: 'dark',
+    timezone: 'Etc/UTC+3',
+    charts_storage_url: "/static/charts_storage",
+    logo: {
+      image: '/static/theme/images/favicon16x16.png',
+      link: 'https://www.s-treasuryqa.com/'
+    },
+    enabled_features: [
+      //"right_bar_stays_on_scroll"
+      "minimalistic_logo"
+      , "narrow_chart_enabled"
+      , "header_saveload"
+      , "header_widget_dom_node"
+      , "header_screenshot"
+      , "show_logo_on_all_charts"
+      , "study_templates"],
+    //enabled_features: ['hide_left_toolbar_by_default'],
+    disabled_features: ["use_localstorage_for_settings"
+      , "link_to_tradingview"
+      //, "volume_force_overlay"
+      , "header_interval_dialog_button"
+      , "show_dialog_on_snapshot_ready"
+      , "chart_property_page_trading"
+      , "chart_crosshair_menu"
+      , "header_symbol_search"
+      , "hide_last_na_study_output"],
+
+  });
+</script>
+
+
+{% endblock %}

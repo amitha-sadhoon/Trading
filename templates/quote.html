@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quote
+{% endblock %}
+
+{% block main %}
+    <form autocomplete="off" action="/quote" id="quote" method="post">
+        <div class="autocomplete input-group col-sm-6 offset-sm-3">
+            <div class="input-group-addon">
+                <span class="fa fa-book"></span>
+            </div>
+            <input autofocus id="stock-lookup" class="form-control" style="padding-right: 50px;" name="symbol" placeholder="Symbol" type="text"/>
+            <button class="btn btn-primary" type="submit">Search <i class="fa fa-search"></i></button>
+        </div>
+    </form>
+
+    <!-- App's own JavaScript -->
+    <script src="/static/js/quote.js"></script>
+    
+{% endblock %}

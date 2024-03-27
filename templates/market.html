@@ -1,0 +1,1210 @@
+-{% extends "market_layout.html" %}
+
+{% block title %}
+Market
+{% endblock %}
+
+{% block main %}
+
+
+
+
+<div class="container-fluid">
+    <div class="row">
+
+
+        <!-- Main Content (Second Column) -->
+        <div class="col-md-9 vh-100 main-content d-flex flex-column">
+            <!-- First Row in Second Column (Top-aligned) -->
+            <div class="card" style="background:linear-gradient(to right, #010000, #761917);">
+                <div class="card-body" id="overall-market" style="padding:0.5rem; ">
+                    <div class="row justify-content-center">
+                        <div class="col-3">
+                            <a href="/" style="text-decoration: none;">
+                                <img src="/static/theme/images/logo/s-treasury.png" style="max-width:70px" alt="Logo">
+
+                            </a>
+                        </div>
+
+                        <div class="col-3">
+                            <h6 style="color:white">Index:<span id="index-value" style="color:#e4c55a;padding-left:2px">0</span></h6>
+                        </div>
+                        <div class="col-3">
+                            <h6 style="color:white">Volume:<span id="total-volume" style="color:#e4c55a;padding-left:2px">0</span></h6>
+                        </div>
+                        <div class="col-3">
+                            <h6 style="color:white">Change:<span id="percentage-change" style="color:#e4c55a;padding-left:2px">0</span> %</h6>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!--<div class="card flex-grow-1">-->
+            <!--    <div class="card-body">-->
+            <!-- TradingView Chart -->
+            <div class="tradingview-widget-container" style="height: 100%;">
+                <div id="tradingview-widget" style="height: 100%;">Please wait While Loading Chart</div>
+            </div>
+            <!--    </div>-->
+            <!--</div>-->
+
+            <!-- Third Row in Second Column (Bottom-aligned) --==========>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-9">
+                            <!-- <div class="tabbable-panel"> -->
+                            <div class="tabbable-line">
+                                <ul class="nav nav-tabs ">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-toggle="tab" href="#tab_stocks">Stocks</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#tab_orders">Orders</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#tab_portfolio">Portfolio</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#tab_trade">Trade <i
+                                                class="fas fa-circle fa-xs" style="color: rgb(34, 150, 34); "></i></a>
+                                    </li>
+
+                                </ul>
+
+                            </div>
+                            <!-- </div> -->
+                        </div>
+                        <div class="col-2 text-right">
+
+                            <button id="toggle-options" class="btn btn-sm nav-link" onclick="toggleBuySellOptions()">
+                                <i id="options-icon" class="fas fa-chevron-up"></i>
+                                <span id="options-text">Show Options</span>
+                            </button>
+
+
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Buy/Sell Options (Initially hidden) -->
+                <div class="mt-auto buy-sell-options" id="buy-sell-options"
+                    style="max-height: 300px; min-height: 200px; overflow: auto;display: none;padding: 0;">
+
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab_stocks" style="padding: 0;">
+                            <div class="row">
+                                <div class="container">
+                                    <table class="table table-bordered table-hover table-fixed">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 20%;">COMPANY</th>
+                                                <th>PRICE</th>
+                                                <th>CHG</th>
+                                                <th>CHG%</th>
+                                                <th>RATING</th>
+                                                <th>VOLUME</th>
+                                                <th style="width: 20%;">INDUSTRY</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="stocks-table-body">
+                                            <!-- Existing rows will be replaced by JavaScript -->
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab_orders">
+                            <div class="card-header">
+                                <div class="row">
+
+                                    <!-- <div class="tabbable-panel"> -->
+                                    <div class="tabbable-line">
+                                        <ul class="nav nav-tabs ">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" data-toggle="tab"
+                                                    href="#tab_pending_order">Pending</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="tab"
+                                                    href="#tab_completed_order">Completed</a>
+                                            </li>
+
+
+                                        </ul>
+
+                                    </div>
+
+
+                                </div>
+                               <!--===========================-->
+                            </div>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="tab_pending_order" style="padding: 0;">
+                                    <div class="row">
+                                        <div class="container">
+                                            <table class="table table-bordered table-hover table-fixed">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 20%;">Company</th>
+                                                        <th>Price</th>
+                                                        <th>Quantity</th>
+                                                        <th>Type</th>
+                                                        <th>Order ID</th>
+                                                        <th style="width: 30%;">Placing Time</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="pending-order-table-body">
+                                                    <!-- Existing rows will be replaced by JavaScript -->
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab_completed_order" style="padding: 0;">
+                                    <div class="row">
+                                        <div class="container">
+                                            <table class="table table-bordered table-hover table-fixed">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 20%;">Company</th>
+                                                        <th>Price</th>
+                                                        <th>Fill Price</th>
+                                                        <th>Quantity</th>
+                                                        <th>Type</th>
+                                                        <th>Order ID</th>
+                                                        <th style="width: 30%;">Placing Time</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="completed-order-table-body">
+                                                    <!-- Existing rows will be replaced by JavaScript -->
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane" id="tab_portfolio">
+                            <div class="row ">
+                                <div class="col-8 text-left">
+
+                                </div>
+                                <div class="col-2 text-right">
+                                    <b>Account Balance</b> <br>500,000
+                                </div>
+                                <div class="col-2 text-right">
+                                    <b>Total Value</b> <h6 id="portfolio_total_value">0</h6>
+
+                                </div>
+
+
+                            </div>
+
+
+
+                            <!-- Display Stock Holdings -->
+                            <h4>Stock Holdings</h4>
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Company Name</th>
+                                        <th>Shares Count</th>
+                                        <th>Buy Average</th>
+                                        <th>Recent Close Price</th>
+                                        <th>Market Value</th>
+                                        <th>Profit/Loss</th>
+                                        <th>Profit Percentage</th>
+                                    </tr>
+                                </thead>
+
+
+                                <tbody id="stockTableBody">
+                                    <!-- Data will be populated here using JavaScript -->
+                                </tbody>
+                            </table>
+                            
+                            <div class="row justify-content-center">
+                                <div class="col-4"> 
+                                 <!-- Pie Chart -->
+                            <div style="width: 200px; height: 200px;">
+                                <canvas id="holdingStockChart"></canvas>
+                            </div></div>
+                         
+                            </div>
+                           
+                          
+                        </div>
+                        <div class="tab-pane" id="tab_trade">
+
+                            <div class="row justify-content-center" style="padding-bottom:5px">
+                                <img id="company-logo-trading" src="/static/assets/companies/ABQK-small.png" alt="A"
+                                    class="rounded" width="25px" height="25px">
+                                <h5 id="company-symbol-trading" style="padding-left:10px"> ABQK</h5>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="form-group">
+                                    <!-- <label for="trade-quantity">Quantity:</label> -->
+                                    <input type="number" class="form-control" id="trade-quantity" placeholder="Qty">
+                                </div>
+                                <div class="form-group">
+                                    <!-- <label for="trade-price">Price:</label> -->
+                                    <input type="number" class="form-control" id="trade-price" placeholder="Price">
+                                </div>
+
+
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="form-group">
+                                    <h6>Value:</h6>
+                                </div>
+                                <div class="form-group">
+                                    <h6 id="value-element">0.00</h6>
+                                </div>
+
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-success btn-block"
+                                        onclick="initiateTransaction('buy')">Buy</button>
+                                </div>
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-danger btn-block"
+                                        onclick="initiateTransaction('sell')">Sell</button>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+
+
+
+
+        <!-- Third Column (Watchlist) -->
+        <div class="col-md-3 card main-content no-left-margin p-0 d-flex flex-column">
+            <nav class="navbar navbar-fixed-top" >
+
+                <div></div>
+
+                <div class="dropdown">
+                    <button class="btn dropdown-toggle" type="button" id="userDropdown" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        {{ session["user_email"] }}
+                    </button>
+
+                    <div class="dropdown-menu" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#profileModal">
+                            <i class="fas fa-user"></i> Profile
+                        </a>
+                        <a class="dropdown-item" href="/logout" >
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+
+                </div>
+            </nav>
+
+
+            <div style="padding-left:1rem">
+                <h5>Watchlist</h5>
+            </div>
+            <div class="watchlist flex-grow-1">
+
+                <!-- Watchlist Table -->
+                <table class="table watchlist-table table-hover ">
+                    <thead>
+                        <tr>
+                            <th>Symbol</th>
+                            <th>Last</th>
+                            <th>Chg</th>
+                            <th>Chg %</th>
+                        </tr>
+                    </thead>
+                    <tbody id="watchlist-table-body">
+                        <!-- Table rows will be populated here -->
+                    </tbody>
+
+                </table>
+            </div>
+            <hr>
+            <div class="row justify-content-between" style="padding: 0.5rem; padding-left:1rem;padding-right:1rem">
+                <img id="company-logo" src="/static/assets/companies/ABQK-small.png" alt="A" class="rounded"
+                    width="25px">
+                <span id="company-symbol">ABQK</span>
+                <i class="fas fa-star text-right"></i>
+            </div>
+            <!-- News Section -->
+            <div class="news-section">
+
+                <div class="card-body">
+                    <span id="company-name">AHLI BANK</span>
+                    <br>
+                    <p id="company-industry" style="color: #a6a6a6;">Finance</p>
+                    <div>
+                        <div class="row">
+                            <h2 id="company-price">3.750</h2>QAR
+                        </div>
+                        <div class="row" id="company-price-change">0.000(0.00%)</div>
+                    </div>
+                </div>
+                <hr>
+                <h4 class="mb-4">News</h4>
+                <div class="news-item">
+                    <h5>Stock Market Update</h5>
+                    <p>The stock market is showing strong gains today, with major indices reaching new all-time
+                        highs. Investors are optimistic about...</p>
+                </div>
+                <div class="news-item">
+                    <h5>Economic Report</h5>
+                    <p>The latest economic report indicates a positive outlook for the economy, with increased
+                        consumer spending and job growth...</p>
+                </div>
+                <div class="news-item">
+                    <h5>Economic Report</h5>
+                    <p>The latest economic report indicates a positive outlook for the economy, with increased
+                        consumer spending and job growth...</p>
+                </div>
+                <div class="news-item">
+                    <h5>Economic Report</h5>
+                    <p>The latest economic report indicates a positive outlook for the economy, with increased
+                        consumer spending and job growth...</p>
+                </div>
+                <!-- Add more news items here -->
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- Modal for Confirmation -->
+<div class="modal fade-scale" id="confirmationModal" tabindex="-1" role="dialog"
+    aria-labelledby="confirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmationModalLabel">Confirm Save</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to save this company to your preferred list?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="confirmSave">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal for Buying Confirmation -->
+<div class="modal fade" id="buyModal" tabindex="-1" role="dialog" aria-labelledby="buyModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="buyModalLabel">Confirm Buy</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to buy?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" onclick="confirmBuy()">Confirm
+                    Buy</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for Selling Confirmation -->
+<div class="modal fade" id="sellModal" tabindex="-1" role="dialog" aria-labelledby="sellModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="sellModalLabel">Confirm Sell</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to sell?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="confirmSell()">Confirm
+                    Sell</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Success</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="successMessage"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Order Delte Confirmation Modal -->
+<div class="modal fade" id="OrderDeleteConfirmationModal" tabindex="-1" role="dialog"
+    aria-labelledby="confirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmationModalLabel">Confirmation</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this order?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" id="confirmDelete">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Welcome Modal -->
+<div class="modal fade" id="welcomeModal" tabindex="-1" role="dialog" aria-labelledby="welcomeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="padding:0">
+                <!-- Replace the text with an image -->
+                <img src="https://img.freepik.com/premium-photo/youthful-prosperous-cheerful-businessman-monitoring-stock-market-looking-good-banking-idea-generate-ai_905417-601.jpg" alt="Welcome Image">
+                <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+                <!--    <span aria-hidden="true">&times;</span>-->
+                <!--</button>-->
+            </div>
+            <div class="modal-body ">
+                <div class="justify-content-center">
+                    <strong>Congratulation!</strong>
+                    
+                <p id="successMessage">You have got 500,000 QAR Virtual currency.</p>
+                </div>
+                
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-primary rounded"
+                                                style="background: #e3b04b !important; border: #e3b04b !important" data-dismiss="modal">Get Started</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Profile Modal -->
+<div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- Replace the text with an image -->
+                <!--<img src="https://img.freepik.com/premium-photo/youthful-prosperous-cheerful-businessman-monitoring-stock-market-looking-good-banking-idea-generate-ai_905417-601.jpg" alt="Welcome Image">-->
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body ">
+                 <form id="signin-form" method="POST">
+                                        <div class="form-group mb-3">
+                                            <label class="label" for="username">Email</label>
+                                            <input type="text" class="form-control" id="email" name="email"
+                                                placeholder="Email" value="{{ session['user_email'] }}">
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label class="label" for="username">Username</label>
+                                            <input type="text" class="form-control" id="username" name="username"
+                                                placeholder="Username" value="{{ session['user_username'] }}">
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label class="label" for="password">Password</label>
+                                            <input type="password" class="form-control" id="password" name="password"
+                                                placeholder="Password">
+                                        </div>
+                                        
+                                         <div class="form-group mb-3">
+                                            <label class="label" for="password">Virtual Credit: </label>
+                                            <input readonly type="text" class="form-control" id="cash"
+                                               value="{{ session['virtual_credit'] }}" >
+                                        </div>
+                                     
+                                    </form>
+                
+            </div>
+            <div class="modal-footer justify-content-center">
+                 <button type="submit" class="btn btn-primary rounded"
+                                                style="background: #e3b04b !important; border: #e3b04b !important">Save Profile</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<link rel="stylesheet" href="/static/css/custom-style.css" />
+
+
+<!-- Add TradingView Widget Script -->
+<!--<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>-->
+
+
+<script>
+
+    const widget = new TradingView.widget({
+        container_id: 'tradingview-widget',
+        datafeed: new Datafeeds.UDFCompatibleDatafeed('https://tradingsimulator.alkunsolutions.com', 'live'),
+        width: "100%",
+        height: "100%",
+        symbol: 'ABQK',
+        fullscreen: true,
+        interval: '1D',
+        fullscreen: true,
+        autosize: true,
+        debug: true,
+        theme: 'dark',
+        timezone: 'Etc/UTC+3',
+        charts_storage_url: "/static/charts_storage",
+
+        logo: {
+            image: '/static/theme/images/favicon-32x32.png',
+            link: 'https://www.s-treasuryqa.com/'
+        },
+        enabled_features: [
+            //"right_bar_stays_on_scroll"
+            "minimalistic_logo"
+            , "narrow_chart_enabled"
+            //   , "header_saveload"
+            , "header_widget_dom_node"
+            , "header_screenshot"
+            , "show_logo_on_all_charts"
+            , "study_templates"],
+        //enabled_features: ['hide_left_toolbar_by_default'],
+        disabled_features: ["use_localstorage_for_settings"
+            , "link_to_tradingview"
+            //, "volume_force_overlay"
+            , "header_interval_dialog_button"
+            , "show_dialog_on_snapshot_ready"
+            , "chart_property_page_trading"
+            , "chart_crosshair_menu"
+            , "header_symbol_search"
+            , "hide_last_na_study_output"],
+
+    });
+</script>
+
+
+<script>
+    function toggleBuySellOptions() {
+        const options = document.getElementById("buy-sell-options");
+        const toggleButton = document.getElementById("toggle-options");
+        const optionsIcon = document.getElementById("options-icon");
+        const optionsText = document.getElementById("options-text");
+
+        if (options.style.display === "none") {
+            options.style.display = "block";
+            optionsIcon.className = "fas fa-chevron-down"; // Replace with the icon you want for "Hide Options"
+            optionsText.textContent = "Hide Options";
+        } else {
+            options.style.display = "none";
+            optionsIcon.className = "fas fa-chevron-up"; // Replace with the icon you want for "Show Options"
+            optionsText.textContent = "Show Options";
+        }
+    }
+
+</script>
+
+<script>
+    $(document).ready(function () {
+        // Initialize Bootstrap Tooltip for close button
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+
+<script>
+    // Get the first iframe element on the page
+    var iframes = document.getElementsByTagName("iframe");
+
+    if (iframes.length > 0) {
+        var iframe = iframes[0]; // Assuming you want to modify the style of the first iframe
+
+        // Replace the style attribute with your desired value
+        iframe.style.cssText = "width:100%; height: 100%; margin: 0px !important; padding: 0px !important;"; // Modify this line with your desired style
+    }
+
+</script>
+
+<script>
+    // Function to update the card with company data and chart symbol
+    function updateCardAndChart(data) {
+        document.getElementById('company-logo').src = data.logo;
+        document.getElementById('company-symbol').textContent = data.symbol;
+        document.getElementById('company-name').textContent = data.name;
+        document.getElementById('company-industry').textContent = data.industry;
+        document.getElementById('company-price').textContent = data.close;
+        document.getElementById('company-price-change').textContent = `${data.close_price_change} (${data.close_price_change_percentage}%)`;
+
+        document.getElementById('company-logo-trading').src = data.logo;
+        document.getElementById('company-symbol-trading').textContent = data.symbol;
+
+        // Update the chart symbol
+        widget.chart().setSymbol(data.symbol, '1D');
+    }
+
+    // Function to fetch and update the table
+    function updateStockTable() {
+        fetch('/latest_data')
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.getElementById('stocks-table-body');
+                tableBody.innerHTML = ''; // Clear existing rows
+
+                data.latest_data.forEach(company => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="${company.logo}"
+                                    alt="Icon" class="mr-2 rounded" style="width: 20px;">
+                                <span>${company.symbol}</span>
+                            </div>
+                            <small>${company.name}</small>
+                        </td>
+                        <td>${company.close}</td>
+                        <td>${company.close_price_change}</td>
+                        <td>${company.close_price_change_percentage}</td>
+                        <td>${company.rating}</td>
+                        <td>${company.volume}</td>
+                        <td>${company.industry}</td>
+                    `;
+
+                    // Add a click event listener to the row to update the card and chart
+                    row.addEventListener('click', () => {
+                        updateCardAndChart(company);
+                    });
+
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(error => console.error(error));
+    }
+
+    // Call the function to populate the table initially
+    updateStockTable();
+</script>
+
+
+<script>
+    // Function to handle the click event on the star icon
+    function handleStarIconClick() {
+        // Show the confirmation modal
+        $('#confirmationModal').modal('show');
+    }
+
+    // Function to save the company as preferred
+    function saveCompanyAsPreferred() {
+        const user_id = '{{ session["user_id"] }}'; // Replace with the actual user ID
+        const symbol = document.getElementById('company-symbol').textContent;
+
+        fetch('/record_preferred', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ user_id, symbol })
+        })
+            .then(response => response.json())
+            .then(data => {
+                // Close the confirmation modal
+                $('#confirmationModal').modal('hide');
+                populateWatchlistTable();
+                // Show the success modal
+                // $('#successModal').modal('show');
+            })
+            .catch(error => console.error(error));
+    }
+
+    // Attach the click event handler to the star icon
+    document.querySelector('.fas.fa-star').addEventListener('click', handleStarIconClick);
+
+    // Attach the click event handler to the confirm button in the confirmation modal
+    document.getElementById('confirmSave').addEventListener('click', saveCompanyAsPreferred);
+</script>
+
+
+<script>
+
+    // Function to delete a preferred item
+    function deletePreferredItem(user_id, symbol) {
+        fetch('/delete_preferred', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                user_id: user_id,
+                symbol: symbol,
+            }),
+        })
+            .then(response => {
+                if (response.status == 200) {
+                    // Refresh the watchlist table after successful deletion
+                    populateWatchlistTable();
+                } else {
+                    console.log(response);
+                }
+            })
+            .catch(error => console.error(error));
+    }
+
+
+    // Function to fetch and populate the watchlist table
+    function populateWatchlistTable() {
+        const user_id = '{{ session["user_id"] }}'; // Replace with the actual user ID
+
+        fetch(`/get_preferred_details?user_id=${user_id}`)
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.getElementById('watchlist-table-body');
+                tableBody.innerHTML = ''; // Clear existing rows
+
+                data.preferred.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.classList.add('watchlist-custom-row'); // Apply custom row height class
+                    row.innerHTML = `
+                        <td>
+                            <img src="${item.logo}" alt="" class="rounded" width="20px">
+                            ${item.symbol}
+                        </td>
+                        <td>${item.close}</td>
+                        <td>${item.close_price_change}</td>
+                        <td>${item.close_price_change_percentage}
+                                
+                            <span class="close-button" data-toggle="tooltip" data-placement="top" title="Close">
+                                <i class="fas fa-times" style="color:red"></i>
+                            </span>
+                        </td>
+                    `;
+
+                    // Add a click event listener to the row to update the card and chart
+                    row.addEventListener('click', () => {
+                        updateCardAndChart(item);
+                    });
+
+                    // Add a click event listener to the close button to delete the item
+                    const closeButton = row.querySelector('.close-button');
+                    closeButton.addEventListener('click', event => {
+                        event.stopPropagation(); // Prevent the row click event from firing
+                        const symbol = item.symbol;
+                        deletePreferredItem(user_id, symbol);
+                    });
+
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(error => console.error(error));
+    }
+
+    // Call the function to populate the watchlist table initially
+    populateWatchlistTable();
+</script>
+
+
+<script>
+
+    // Function to delete an Order item
+
+    function deleteOrder(orderId) {
+        // Show the confirmation modal
+        const confirmationModal = new bootstrap.Modal(document.getElementById('OrderDeleteConfirmationModal'));
+        confirmationModal.show();
+
+        // Set the order ID as a data attribute on the confirmation button
+        const confirmDeleteButton = document.getElementById('confirmDelete');
+        confirmDeleteButton.dataset.orderId = orderId;
+
+        // Add a click event listener to the confirmation button
+        confirmDeleteButton.addEventListener('click', function () {
+            // Retrieve the order ID from the data attribute
+            const orderIdToDelete = this.dataset.orderId;
+
+            // Send an AJAX request to delete the order
+            fetch(`/delete_order/${orderIdToDelete}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Handle the success message
+                    console.log(data.message);
+                    // You may want to update the orders table after deleting the order
+                    populateOrdersTable('pending-order-table-body', 'pending');
+                })
+                .catch(error => {
+                    // Handle errors
+                    console.error(error);
+                });
+
+            // Close the confirmation modal
+            confirmationModal.hide();
+        });
+    }
+
+
+
+    // Function to fetch and populate the orders table
+    function populateOrdersTable(tableId, status) {
+        const user_id = '{{ session["user_id"] }}'; // Replace with the actual user ID
+
+        fetch(`/get_orders?user_id=${user_id}&status=${status}`)
+            .then(response => response.json())
+            .then(data => {
+                const tableBody = document.getElementById(tableId);
+                tableBody.innerHTML = ''; // Clear existing rows
+
+                data.orders.forEach(order => {
+                    const row = document.createElement('tr');
+                    var order_type_color = "success";
+                    if (order.order_type == "sell") { order_type_color = "danger" }
+                    if (status === 'completed') {
+                        // Populate columns specific to the completed orders table
+                        row.innerHTML = `
+                            <td><img src="${order.logo}" alt="" class="rounded" width="20px"> ${order.symbol}</td>
+                            <td>${order.order_price}</td>
+                            <td>${order.order_price}</td>   
+                            <td>${order.order_quantity}</td>
+                            <td><span class="badge badge-${order_type_color}">${order.order_type}</span></td>
+                            <td>${order.order_id}</td>
+                            <td>${order.order_date}</td>
+                        `;
+                    } else {
+
+                        // Populate columns specific to the pending orders table
+                        row.innerHTML = `
+                            <td><img src="${order.logo}" alt="" class="rounded" width="20px"> ${order.symbol}</td>
+                            <td>${order.order_price}</td>
+                            <td>${order.order_quantity}</td>
+                            <td><span class="badge badge-${order_type_color}">${order.order_type}</span></td>
+                            <td>${order.order_id}</td>
+                            <td>${order.order_date}</td>
+                            <td><button type="button" class="cancel-order-button btn btn-danger btn-sm"><i class="fas fa-times"></i></button></td>
+                        `;
+
+                        // Add a click event listener to the close button to delete the item
+                        const closeButton = row.querySelector('.cancel-order-button');
+                        closeButton.addEventListener('click', event => {
+                            event.stopPropagation(); // Prevent the row click event from firing
+                            const order_id = order.order_id;
+                            deleteOrder(order_id);
+                        });
+                    }
+
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(error => console.error(error));
+    }
+
+    // Populate the Pending Orders table
+    populateOrdersTable('pending-order-table-body', 'pending');
+
+    // Populate the Completed Orders table
+    populateOrdersTable('completed-order-table-body', 'completed');
+</script>
+
+
+<!--Buy and sell confirmation-->
+
+<script>
+    function initiateTransaction(orderType) {
+        const order_price = parseFloat(document.getElementById('trade-price').value);
+        const order_quantity = parseInt(document.getElementById('trade-quantity').value);
+
+
+        // Validate the input fields
+        if (isNaN(order_price) || isNaN(order_quantity) || order_price <= 0 || order_quantity <= 0) {
+            return;
+        } else {
+            displayTransactionConfirmationModal(orderType);
+        }
+    }
+
+    function displayTransactionConfirmationModal(orderType) {
+        if (orderType == 'buy') {
+            const confirmationModal = new bootstrap.Modal(document.getElementById('buyModal'));
+            confirmationModal.show();
+        } else {
+            const confirmationModal = new bootstrap.Modal(document.getElementById('sellModal'));
+            confirmationModal.show();
+        }
+
+    }
+</script>
+<script>
+    function confirmBuy() {
+        // Close the modal
+        document.getElementById('buyModal').style.display = 'none';
+
+        // Retrieve values from the form
+        const symbol = document.getElementById('company-symbol-trading').textContent.trim();
+        const orderType = 'buy'; // Set the order type to 'buy'
+        const order_price = parseFloat(document.getElementById('trade-price').value);
+        const order_quantity = parseInt(document.getElementById('trade-quantity').value);
+
+        // Send an AJAX request to place the order
+        sendOrder(symbol, orderType, order_price, order_quantity);
+    }
+
+    function confirmSell() {
+        // Close the modal
+        document.getElementById('sellModal').style.display = 'none';
+
+        // Retrieve values from the form
+        const symbol = document.getElementById('company-symbol-trading').textContent.trim();
+        const orderType = 'sell'; // Set the order type to 'sell'
+        const order_price = parseFloat(document.getElementById('trade-price').value);
+        const order_quantity = parseInt(document.getElementById('trade-quantity').value);
+
+
+
+
+        // Send an AJAX request to place the order
+        sendOrder(symbol, orderType, order_price, order_quantity);
+    }
+
+    function sendOrder(symbol, orderType, order_price, order_quantity) {
+        // Replace with the actual user ID
+        const user_id = '{{ session["user_id"] }}';
+
+        const data = {
+            user_id: user_id,
+            symbol: symbol,
+            order_type: orderType,
+            order_price: order_price,
+            order_quantity: order_quantity
+        };
+
+        // Create and configure the XMLHttpRequest object
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '/place_order', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+
+        // Define the onload and onerror handlers
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                // Handle success, e.g., display a success message to the user
+                const response = JSON.parse(xhr.responseText);
+                const successMessage = response.message;
+                displaySuccessModal(successMessage);
+
+                document.getElementById('trade-price').value = ''; // Clear the price input
+                document.getElementById('trade-quantity').value = ''; // Clear the quantity input
+
+                // Populate the Pending Orders table
+                populateOrdersTable('pending-order-table-body', 'pending');
+            } else {
+                // Handle error, e.g., display an error message to the user
+                const error = JSON.parse(xhr.responseText);
+                console.error(error.error);
+            }
+        };
+
+        // Send the request with the data
+        xhr.send(JSON.stringify(data));
+    }
+
+    function displaySuccessModal(message) {
+        const successMessageElement = document.getElementById('successMessage');
+        successMessageElement.textContent = message;
+        const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+        successModal.show();
+    }
+</script>
+
+<script>
+    // Get references to the quantity and price input fields and the value element
+    const quantityInput = document.getElementById('trade-quantity');
+    const priceInput = document.getElementById('trade-price');
+    const valueElement = document.getElementById('value-element');
+
+    // Add event listeners to the quantity and price input fields
+    quantityInput.addEventListener('input', updateValue);
+    priceInput.addEventListener('input', updateValue);
+
+    function updateValue() {
+        const quantity = parseInt(quantityInput.value) || 0;
+        const price = parseFloat(priceInput.value) || 0;
+
+        // Calculate the value and update the element
+        const value = (quantity * price).toFixed(2); // Assuming you want to display the value with two decimal places
+        valueElement.textContent = value;
+    }
+</script>
+
+
+<!--Populate Overall Market-->
+<script>
+    function updateOverallMarket() {
+        $.get('/overall_market_data', function (data) {
+
+            var indexValue = data.data.index_value;
+            var totalVolume = data.data.total_volume;
+            var percentageChange = data.data.percentage_change;
+            // Update the placeholders with the retrieved data
+            $("#index-value").text(indexValue);
+            $("#total-volume").text(totalVolume);
+            $("#percentage-change").text(percentageChange);
+        });
+    }
+    updateOverallMarket();
+</script>
+
+
+
+<!--portfolio Holdings-->
+<script>
+    const user_id = '{{ session["user_id"] }}';
+    function fillPortfolioDetails() {
+        // JavaScript to fetch the data and create the pie chart
+        fetch(`/get_holding_stocks?user_id=${user_id}`)  // Replace '123' with the actual user ID
+            .then(response => response.json())
+            .then(data => {
+
+                var stocks = data[0].stocks;
+                var summary = data[1].summary;
+
+                // Populate the Stock Holdings table
+                var stockTableBody = document.getElementById("stockTableBody");
+                stocks.forEach(function (stock) {
+
+                    console.log(stock);
+
+                    var row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td><img src="${stock.logo}"
+                                    alt="Icon" class="mr-2 rounded" style="width: 20px;">
+                                <span>${stock.symbol}</span></td>
+                        <td>${stock.shares_count}</td>
+                        <td>${stock.buy_average}</td>
+                        <td>${stock.recent_close_price}</td>
+                        <td>${stock.market_value}</td>
+                        <td style="color: ${stock.profit_loss < 0 ? 'red' : 'green'};">${stock.profit_loss}</td>
+                        <td style="color: ${stock.profit_percentage < 0 ? 'red' : 'green'};">${stock.profit_percentage}%</td>
+                    `;
+                    stockTableBody.appendChild(row);
+                });
+
+                // Populate the Summary table
+                var total_value = document.getElementById("portfolio_total_value");
+                var summaryItem = summary[0];
+                 total_value.textContent = summaryItem.total_value;
+                // var row = document.createElement("tr");
+                // row.innerHTML = `
+                //     <td>${summaryItem.total_value}</td>
+                //     <td>${summaryItem.equity}</td>
+                //     <td>${summaryItem.debt}</td>
+                // `;
+                // summaryTableBody.appendChild(row);
+
+                // Create the Pie Chart
+                var ctx = document.getElementById("holdingStockChart").getContext("2d");
+                var chartData = {
+                    labels: stocks.map(function (stock) {
+                        return stock.symbol;
+                    }),
+                    datasets: [
+                        {
+                            data: stocks.map(function (stock) {
+                                return stock.market_value;
+                            }),
+                            backgroundColor: [
+
+                                "#27224B",
+                                "#3398F6",
+                                "#242E65",
+                                "#3380F6",
+                                // Add more colors here if needed
+                            ],
+                        },
+                    ],
+                };
+                var pieChart = new Chart(ctx, {
+                    type: "pie",
+                    data: chartData,
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+
+    }
+    fillPortfolioDetails();
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    
+    console.log();
+   
+        $('#welcomeModal').modal('show');
+   
+});
+</script>
+
+
+
+<!-- Add Bootstrap JS (if needed) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+{% endblock %}

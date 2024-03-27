@@ -1,0 +1,65 @@
+/*styles.css 
+
+/* Change background color to red for PortfolioBanner */
+
+body {
+  background-color: #1b0028; /* Change to the desired background color */background-color: #360051; /* Change to the desired background color */
+  background-image: linear-gradient(to bottom right, #1B0028,#360051);
+}
+.ud-about-wrapper {
+  margin-top: 3in;
+  margin-left:10px;
+}
+/* Set border-collapse to separate and remove spacing */
+.ud-about-wrapper table {
+  border-collapse: separate;
+  border-spacing: 0;
+ }
+ 
+
+
+
+.table-rounded {
+  border-radius: 10px; /* Adjust the border-radius value as needed */
+  
+}
+
+
+/* Add space between each column and row in the table */
+.ud-about-wrapper table {
+
+  border-spacing: 25px; /* Adjust spacing as needed */
+}
+
+/* Add a white border to the table */
+.ud-about-wrapper table {
+  border: 1px solid white;
+}
+
+/* Change font size and color for table headings */
+.table th {
+  font-size: 13px; /* Change to the desired font size */
+  color: #fff; /* Change to the desired color */
+}
+.stock-holdings {
+  font-size: 16px !important; /* Adjust the font size as needed */
+  /*font-family:'Outfit',sans-serif;*/
+}
+
+/* Add solid border to the bottom of the border-row */
+.border-row td {
+  border-bottom: 4px solid rgb(230, 224, 224) ;
+ }
+ 
+
+
+/* Change font size and color for table contents */
+.table td {
+  font-size: 12px; /* Change to the desired font size */
+  color: #eceaea; /* Change to the desired color */
+}
+
+.ud-about-wrapper table td:nth-child(6),
+.ud-about-wrapper table td:nth-child(7) {
+ color: #1EDA00;
+}

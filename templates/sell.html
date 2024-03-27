@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Buy
+{% endblock %}
+
+{% block main %}
+    <form action="/sell" id="sell" method="post">
+        <div class="form-group">
+            <select class="form-control" name="symbol">
+                <option disabled selected value="">Symbol</option>
+                    {% for stock in stocks %}
+                        <option value="{{ stock["symbol"] }}">{{ stock["symbol"] }}</option>
+                    {% endfor %}
+            </select>
+        </div>
+        <div class="input-group col-sm-4 offset-sm-4">
+            <div class="input-group-addon">
+                <span class="fa fa-minus"></span>
+            </div>
+            <input class="form-control" name="shares" min="1" placeholder="Shares" type="number"/>
+        </div>
+        <button class="btn btn-primary" type="submit">Sell</button>
+    </form>
+
+    <!-- App's own JavaScript -->
+    <script src="/static/js/sell.js"></script>
+    
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Buy
+{% endblock %}
+
+{% block main %}
+    <form action="/buy" id="buy" method="post">
+        <div class="input-group col-sm-4 offset-sm-4">
+            <div class="input-group-addon">
+                <span class="fa fa-book"></span>
+            </div>
+            <input autocomplete="off" autofocus class="form-control" name="symbol" placeholder="Symbol" type="text"/>
+        </div>
+        <div class="input-group col-sm-4 offset-sm-4">
+            <div class="input-group-addon">
+                <span class="fa fa-plus"></span>
+            </div>
+            <input class="form-control" name="shares" min="1" placeholder="Shares" type="number"/>
+        </div>
+        <button class="btn btn-primary" type="submit">Buy</button>
+    </form>
+
+    <!-- App's own JavaScript -->
+    <script src="/static/js/buy.js"></script>
+{% endblock %}

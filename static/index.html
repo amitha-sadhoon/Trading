@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Data Chart</title>
+    <script src="/charting_library/charting_library.standalone.js"></script>
+    <script src="/datafeeds/udf/dist/bundle.js"></script>
+</head>
+<body>
+    <div id="chartContainer"></div>
+
+    <!-- <script>
+        new TradingView.widget({
+            container_id: 'chartContainer',
+            locale: 'en',
+            library_path: 'charting_library/',
+            datafeed: new Datafeeds.UDFCompatibleDatafeed('https://demo-feed-data.tradingview.com'), 
+            symbol: 'AAPL', // Replace with your symbol
+            interval: '1D',
+            fullscreen: true,
+            debug: true,
+            overrides: {
+                'paneProperties.background': '#131722',
+                'paneProperties.vertGridProperties.color': '#363c4e',
+                'paneProperties.horzGridProperties.color': '#363c4e',
+                'symbolWatermarkProperties.transparency': 90,
+                'scalesProperties.textColor': '#AAA',
+            },
+            studies_overrides: {
+                'moving average.exponential.length': 12,
+                'volume.volume.color.0': '#00FFFF',
+                'volume.volume.color.1': '#FF00FF',
+            },
+            customFormatters: {
+                timeFormatter: function (unixTimestamp) {
+                    const date = new Date(unixTimestamp);
+                    return date.toISOString();
+                },
+            },
+
+            theme: 'Dark',
+        });
+    </script> -->
+
+    <script>
+        new TradingView.widget({
+            container_id: 'chartContainer',
+            datafeed: new Datafeeds.UDFCompatibleDatafeed('https://tradingsimulator.alkunsolutions.com/'),  // Use your Flask endpoints
+            symbol: 'ABQK',  // Replace with your symbol
+            interval: '1D',
+            fullscreen: true,
+            debug: true,
+            hotlist: true,
+            calendar: true,
+           
+        });
+        
+    </script>
+</body>
+</html>
